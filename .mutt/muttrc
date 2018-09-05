@@ -1,0 +1,50 @@
+# import account settings
+folder-hook 'account.de.foo' 'source ~/.mutt/accounts/foo.muttrc'
+folder-hook 'account.de.bar' 'source ~/.mutt/accounts/bar.muttrc'
+
+#Default Account
+source ~/.mutt/accounts/foo.muttrc
+
+macro index <f2> '<sync-mailbox><enter-command>source ~/.mutt/accounts/foo.muttrc<enter><change-folder>!<enter>'
+macro index <f3> '<sync-mailbox><enter-command>source ~/.mutt/accounts/bar.muttrc<enter><change-folder>!<enter>'
+
+# move up and down row-wise in mails
+bind pager k previous-line
+bind pager j next-line
+
+
+#sidebar
+set sidebar_visible
+set sidebar_format = "%B%?F? [%F]?%* %?N?%N/?%S"
+set mail_check_stats
+
+# use 'G' to fetch mail
+bind index G imap-fetch-mail
+
+# gpg configuration
+# https://gitlab.com/muttmua/mutt/wikis/MuttGuide/UseGPG
+#source ~/.mutt/configs/gpg.rc
+
+set pgp_auto_decode
+set pgp_autosign
+set pgp_replysignencrypted
+set pgp_verify_sig
+
+# show mails in threads
+set sort=threads
+set strict_threads
+
+# color theme
+source ~/.mutt/colours/mutt-colors-solarized-dark-256.muttrc
+
+# carddav integration
+#set query_command="khard email --parsable '%s'"
+#bind editor <Tab> complete-query
+
+# cache settings
+set message_cachedir='~/.cache/mutt/bodies'
+set header_cache='~/.cache/mutt/headers'
+
+# file handling
+set mailcap_path='~/.mutt/mailcap'
+auto_view text/html
